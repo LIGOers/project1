@@ -20,7 +20,8 @@ import java.io.File;
 
 public class Main extends JFrame {
 
-
+    boolean firstBuild = true;
+    VideoInputDemo videoInputPanel;
     public Main(){
 
         final int WINDOW_WIDTH = 1024;
@@ -36,7 +37,7 @@ public class Main extends JFrame {
 
         BuildBuffer();
 
-        BuildStageFour();
+        //BuildStageFour();
 
         BuildStageThree();
 
@@ -47,8 +48,6 @@ public class Main extends JFrame {
         setResizable(false);
 
         setVisible(true);
-
-
 
     }
 
@@ -116,7 +115,6 @@ public class Main extends JFrame {
                BuildStageTwo();
 
             }
-
             @Override
             public void mousePressed(MouseEvent e) {
 
@@ -329,9 +327,6 @@ public class Main extends JFrame {
                 initFX(fxPanel);
             }
         });
-
-
-
         /**
          *  Video Player End
          */
@@ -663,9 +658,6 @@ public class Main extends JFrame {
         stage.setBackground(Color.BLACK);
 
 
-
-
-
         JLabel navbtn01 = new JLabel(nav_btn_01);
         JLabel navbtn02 = new JLabel(nav_btn_02);
         JLabel navbtn03 = new JLabel(nav_btn_03);
@@ -799,34 +791,23 @@ public class Main extends JFrame {
         //JLabel content = new JLabel();
 
         //content.setLayout(new FlowLayout());
-
         /**
          * Add Code for Webcam here
-         *
-         *
-         *
          */
-
-
-
-
-
-
-
-
-
-
-
-        
-
+        if(firstBuild == true){
+            int width = 768;
+            int height = 436;
+            int fps = 30;
+            videoInputPanel = new VideoInputDemo(width, height, fps);
+            videoInputPanel.setMirror(true);
+            stage.add(videoInputPanel, BorderLayout.CENTER );
+            firstBuild = false;
+        }
+        stage.add(videoInputPanel, BorderLayout.CENTER );
+        stage.repaint();
         /**
          *
          */
-
-
-
-
-
         footer.setLayout(new FlowLayout());
 
         footer.add(Box.createRigidArea(new Dimension(100, 85)));
