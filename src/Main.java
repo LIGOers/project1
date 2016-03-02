@@ -63,10 +63,8 @@ public class Main  extends JFrame   {
                 // TODO: Put your code to process a message in here
                 System.out.println("Inside");
                 message.setAddress("/done");
-
-
                 System.out.println("Handler1 called with address " + message.getAddress());
-                System.out.println(currentStage);
+                System.out.println("current state : " + currentStage);
                 if(currentStage != 1){
                     BuildStageOne();
                     // Print out values
@@ -89,7 +87,7 @@ public class Main  extends JFrame   {
 
 
                 System.out.println("Handler1 called with address " + message.getAddress());
-                System.out.println(currentStage);
+                System.out.println("current state : " + currentStage);
                 if(currentStage != 2){
                     BuildStageTwo();
                     // Print out values
@@ -114,7 +112,7 @@ public class Main  extends JFrame   {
 
 
                 System.out.println("Handler1 called with address " + message.getAddress());
-                System.out.println(currentStage);
+                System.out.println("current state : " + currentStage);
                 if(currentStage != 3){
                     BuildStageThree();
                     // Print out values
@@ -137,7 +135,7 @@ public class Main  extends JFrame   {
                 // TODO: Put your code to process a message in here
                 System.out.println("Inside");
                 System.out.println("Handler1 called with address " + message.getAddress());
-                System.out.println(currentStage);
+                System.out.println("current state : " + currentStage);
                 if(currentStage != 4){
                     BuildStageFour();
                     // Print out values
@@ -151,8 +149,8 @@ public class Main  extends JFrame   {
                 }
             }
         };
-        receiver.addListener("/1/push1", handler1);
-//        receiver.addListener("/1/push2", handler2);
+//        receiver.addListener("/1/push1", handler1);
+        receiver.addListener("/1/push2", handler2);
 //        receiver.addListener("/1/push3", handler3);
 //        receiver.addListener("/1/push4", handler4);
         receiver.startListening();
@@ -213,8 +211,6 @@ public class Main  extends JFrame   {
         // Set Visibility
         stageOne.setVisible(true);
         button1.setVisible(true);
-
-
 
         // Explore button Actions
         button1.addMouseListener(new MouseListener() {
