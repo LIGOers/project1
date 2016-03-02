@@ -1,4 +1,5 @@
 //import java.awt.*;
+import com.illposed.osc.*;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
@@ -844,9 +845,39 @@ public class Main extends JFrame {
     }
 
 
-    public static void main(String[] args) {
 
 
+        int receiverPort = 8000;
+        OSCPortIn receiver = new OSCPortIn(receiverPort);
+
+        OSCListener handler1 = new OSCListener() {
+            public void acceptMessage(java.util.Date time, OSCMessage message) {
+                // TODO: Put your code to process a message in here
+
+                BuildStageOne();
+                System.out.println("Handler1 called with address " + message.getAddress());
+
+                // Print out values
+                Object[] values = message.getArguments();
+                System.out.printf("Values: [%s", values[0]);
+                for (int i = 1; i < values.length; i++)
+                    System.out.printf(", %s", values[i]);
+                System.out.println("]\n");
+            }
+        };
+
+        receiver.addListener("/1/push1", handler1);
+
+
+
+
+
+
+
+
+
+
+    public static void main(String[] args) throws java.net.SocketException {
         new Main();
 
         System.out.println("Hello World!");
