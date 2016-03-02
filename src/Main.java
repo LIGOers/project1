@@ -17,16 +17,19 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.lang.*;
 
 
-public class Main extends JFrame {
-
+public class Main  extends JFrame   {
+    int currentStage = 0;
     boolean firstBuild = true;
     VideoInputDemo videoInputPanel;
-    public Main(){
+    public Main() throws java.net.SocketException {
 
         final int WINDOW_WIDTH = 1024;
         final int WINDOW_HEIGHT = 768;
+
+
 
         setTitle("LIGO");
 
@@ -50,6 +53,110 @@ public class Main extends JFrame {
 
         setVisible(true);
 
+
+        int receiverPort = 8000;
+        OSCPortIn receiver = new OSCPortIn(receiverPort);
+
+        OSCListener handler1 = new OSCListener() {
+
+            public void acceptMessage(java.util.Date time, OSCMessage message) {
+                // TODO: Put your code to process a message in here
+                System.out.println("Inside");
+                message.setAddress("/done");
+
+
+                System.out.println("Handler1 called with address " + message.getAddress());
+                System.out.println(currentStage);
+                if(currentStage != 1){
+                    BuildStageOne();
+                    // Print out values
+                    Object[] values = message.getArguments();
+                    System.out.printf("Values: [%s", values[0]);
+                    for (int i = 1; i < values.length; i++)
+                        System.out.printf(", %s", values[i]);
+                    System.out.println("]\n");
+                }else{
+                    //empty on purpose
+                }
+            }
+        };
+
+        OSCListener handler2 = new OSCListener() {
+
+            public void acceptMessage(java.util.Date time, OSCMessage message) {
+                // TODO: Put your code to process a message in here
+                System.out.println("INside");
+
+
+                System.out.println("Handler1 called with address " + message.getAddress());
+                System.out.println(currentStage);
+                if(currentStage != 2){
+                    BuildStageTwo();
+                    // Print out values
+                    Object[] values = message.getArguments();
+                    System.out.printf("Values: [%s", values[0]);
+                    for (int i = 1; i < values.length; i++)
+                        System.out.printf(", %s", values[i]);
+                    System.out.println("]\n");
+                }else{
+                    //empty on purpose
+                }
+
+
+            }
+        };
+
+        OSCListener handler3 = new OSCListener() {
+
+            public void acceptMessage(java.util.Date time, OSCMessage message) {
+                // TODO: Put your code to process a message in here
+                System.out.println("INside");
+
+
+                System.out.println("Handler1 called with address " + message.getAddress());
+                System.out.println(currentStage);
+                if(currentStage != 3){
+                    BuildStageThree();
+                    // Print out values
+                    Object[] values = message.getArguments();
+                    System.out.printf("Values: [%s", values[0]);
+                    for (int i = 1; i < values.length; i++)
+                        System.out.printf(", %s", values[i]);
+                    System.out.println("]\n");
+                }else{
+                    //empty on purpose
+                }
+
+
+            }
+        };
+
+        OSCListener handler4 = new OSCListener() {
+
+            public void acceptMessage(java.util.Date time, OSCMessage message) {
+                // TODO: Put your code to process a message in here
+                System.out.println("Inside");
+                System.out.println("Handler1 called with address " + message.getAddress());
+                System.out.println(currentStage);
+                if(currentStage != 4){
+                    BuildStageFour();
+                    // Print out values
+                    Object[] values = message.getArguments();
+                    System.out.printf("Values: [%s", values[0]);
+                    for (int i = 1; i < values.length; i++)
+                        System.out.printf(", %s", values[i]);
+                    System.out.println("]\n");
+                }else{
+                    //empty on purpose
+                }
+            }
+        };
+        receiver.addListener("/1/push1", handler1);
+//        receiver.addListener("/1/push2", handler2);
+//        receiver.addListener("/1/push3", handler3);
+//        receiver.addListener("/1/push4", handler4);
+        receiver.startListening();
+        System.out.println("Server is listening on port " + receiverPort + "...");
     }
 
     private void BuildBuffer(){
@@ -65,6 +172,8 @@ public class Main extends JFrame {
     }
 
     private void BuildStageOne(){
+        currentStage = 1;
+        System.out.println("in build1");
 
         // Button Image References
         ImageIcon bimagehover = new ImageIcon("s1-btn-1.jpg");
@@ -105,15 +214,17 @@ public class Main extends JFrame {
         stageOne.setVisible(true);
         button1.setVisible(true);
 
+
+
         // Explore button Actions
         button1.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 System.out.println("Button Clicked");
                 stageOne.setVisible(false);
-               // BuildStageTwo();
-               // BuildHeaderFooter();
-               BuildStageTwo();
+                // BuildStageTwo();
+                // BuildHeaderFooter();
+                BuildStageTwo();
 
             }
             @Override
@@ -134,8 +245,6 @@ public class Main extends JFrame {
                 setCursor(new Cursor(Cursor.HAND_CURSOR));
 
 
-
-
             }
 
             @Override
@@ -145,18 +254,11 @@ public class Main extends JFrame {
 
             }
         });
-
-
-
-
-
-
-
     }
 
 
     private void BuildStageTwo(){
-
+        currentStage = 2;
         ImageIcon headerbkg = new ImageIcon("header.jpg");
         ImageIcon footerbkg = new ImageIcon("footer.jpg");
         ImageIcon nav_btn_01 = new ImageIcon("btn-01-normal.jpg");
@@ -422,7 +524,7 @@ public class Main extends JFrame {
     }
 
     private void BuildStageThree(){
-
+        currentStage = 3;
         // Navagation and Header Image Setup
 
         ImageIcon headerbkg = new ImageIcon("header.jpg");
@@ -631,7 +733,7 @@ public class Main extends JFrame {
     }
 
     private void BuildStageFour(){
-
+        currentStage = 4;
         // Navagation and Header Image Setup
 
         ImageIcon headerbkg = new ImageIcon("header.jpg");
@@ -821,11 +923,7 @@ public class Main extends JFrame {
         footer.add(navbtn04);
         footer.add(Box.createRigidArea(new Dimension(100, 25)));
 
-
-
-
         footer.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-
 
         header_footer.setPreferredSize(new Dimension(1024, 576));
 
@@ -840,45 +938,12 @@ public class Main extends JFrame {
         add(header_footer);
 
         header_footer.setVisible(true);
-
-
     }
 
+    public static void main(String[] args) throws java.net.SocketException  {
 
-
-
-        int receiverPort = 8000;
-        OSCPortIn receiver = new OSCPortIn(receiverPort);
-
-        OSCListener handler1 = new OSCListener() {
-            public void acceptMessage(java.util.Date time, OSCMessage message) {
-                // TODO: Put your code to process a message in here
-
-                BuildStageOne();
-                System.out.println("Handler1 called with address " + message.getAddress());
-
-                // Print out values
-                Object[] values = message.getArguments();
-                System.out.printf("Values: [%s", values[0]);
-                for (int i = 1; i < values.length; i++)
-                    System.out.printf(", %s", values[i]);
-                System.out.println("]\n");
-            }
-        };
-
-        receiver.addListener("/1/push1", handler1);
-
-
-
-
-
-
-
-
-
-
-    public static void main(String[] args) throws java.net.SocketException {
         new Main();
+
 
         System.out.println("Hello World!");
     }
