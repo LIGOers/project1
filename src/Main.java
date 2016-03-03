@@ -18,6 +18,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.lang.*;
+import java.lang.management.BufferPoolMXBean;
+import javax.swing.OverlayLayout;
 
 
 public class Main  extends JFrame   {
@@ -41,13 +43,329 @@ public class Main  extends JFrame   {
 
         BuildBuffer();
 
-        //BuildStageFour();
+        JPanel main = new JPanel();
 
-        BuildStageThree();
+        main.setLayout( new OverlayLayout(main));
 
-        BuildStageTwo();
+        /**
+         * Stage Two
+         */
 
-        BuildStageOne();
+        JPanel dos = new JPanel();
+
+        ImageIcon headerbkg = new ImageIcon("header.jpg");
+        ImageIcon footerbkg = new ImageIcon("footer.jpg");
+        ImageIcon nav_btn_01 = new ImageIcon("btn-01-normal.jpg");
+        ImageIcon nav_btn_02 = new ImageIcon("btn-02-normal.jpg");
+        ImageIcon nav_btn_03 = new ImageIcon("btn-03-normal.jpg");
+        ImageIcon nav_btn_04 = new ImageIcon("btn-04-normal.jpg");
+
+
+        ImageIcon imagetxt01 = new ImageIcon("01-image-text.jpg");
+
+        JLabel stagetwotxt = new JLabel(imagetxt01);
+
+
+        JPanel header_footer = new JPanel();
+        JPanel stage = new JPanel();
+
+        stage.setPreferredSize(new Dimension(1024, 436));
+        stage.setBackground(Color.BLACK);
+
+        JLabel navbtn01 = new JLabel(nav_btn_01);
+        JLabel navbtn02 = new JLabel(nav_btn_02);
+        JLabel navbtn03 = new JLabel(nav_btn_03);
+        JLabel navbtn04 = new JLabel(nav_btn_04);
+
+        JLabel header = new JLabel(headerbkg);
+        JLabel footer = new JLabel(footerbkg);
+
+        /**
+         *  Video Player
+         */
+        JFXPanel fxPanel = new JFXPanel();
+
+        stage.add(fxPanel);
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                initFX(fxPanel);
+            }
+        });
+        /**
+         *  Video Player End
+         */
+
+        stage.add(stagetwotxt);
+
+        footer.setLayout(new FlowLayout());
+
+        footer.add(Box.createRigidArea(new Dimension(100, 85)));
+        footer.add(navbtn01);
+        footer.add(Box.createRigidArea(new Dimension(100, 25)));
+        footer.add(navbtn02);
+        footer.add(Box.createRigidArea(new Dimension(100, 25)));
+        footer.add(navbtn03);
+        footer.add(Box.createRigidArea(new Dimension(100, 25)));
+        footer.add(navbtn04);
+        footer.add(Box.createRigidArea(new Dimension(100, 25)));
+
+        footer.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+
+        header_footer.setPreferredSize(new Dimension(1024, 576));
+
+        header_footer.setBackground(Color.BLACK);
+
+        header_footer.setLayout(new BorderLayout());
+
+        header_footer.add(header, BorderLayout.NORTH);
+        header_footer.add(stage, BorderLayout.CENTER);
+        header_footer.add(footer, BorderLayout.SOUTH);
+
+        header_footer.setVisible(true);
+
+        dos.add(header_footer);
+
+        //add(header_footer);
+        dos.setVisible(true);
+
+        add(dos);
+
+
+
+
+
+        /**
+         * End Stage Two
+         */
+
+/**
+ * Stage One
+ */
+        // Button Image References
+        ImageIcon bimagehover = new ImageIcon("s1-btn-1.jpg");
+        ImageIcon bimage = new ImageIcon("s1-btn-n1.jpg");
+
+        // Background Image Refernces
+        ImageIcon first = new ImageIcon("tp1-sketch1.jpg");
+
+        JPanel uno = new JPanel();
+
+        JPanel unoright = new JPanel();
+        unoright.setPreferredSize(new Dimension(360, 576));
+        unoright.setOpaque(false);
+        //  Explore Button Setuo
+        JLabel button1 = new JLabel(bimage);
+
+        // Background image Setup
+        JLabel stageOne = new JLabel(first);
+        stageOne.setLayout(new BorderLayout());
+
+        // Create button Size
+        button1.setPreferredSize(new Dimension(244, 55));
+
+        // Create Right panel top padding the Box and add to right panel
+        unoright.add(Box.createRigidArea(new Dimension(360, 450)));
+        unoright.add(button1);
+
+        // Add right rightpanel east on Stageone
+        stageOne.add(unoright, BorderLayout.EAST);
+
+        uno.add(stageOne, BorderLayout.NORTH);
+
+        main.add(uno);
+
+        uno.setVisible(true);
+
+
+
+
+        /**
+         * End Stage One
+         */
+
+        /**
+         * Stage Three
+         */
+
+        JPanel tres = new JPanel();
+
+
+        // Stage Three Image setup
+        ImageIcon stagethreeimagetext = new ImageIcon("stagethree-txt.jpg");
+        ImageIcon stagethreemap = new ImageIcon("map.jpg");
+
+        // Jlabel for images
+        JLabel stagethreetxt = new JLabel(stagethreeimagetext);
+        JLabel stagemap = new JLabel(stagethreemap);
+
+
+        JPanel header_footer3 = new JPanel();
+        JPanel stage3 = new JPanel();
+
+        stage3.setPreferredSize(new Dimension(1024, 436));
+        stage3.setBackground(Color.BLACK);
+
+        stage3.add(stagethreetxt);
+        stage3.add(stagemap);
+
+
+
+        JLabel navbtn01_3 = new JLabel(nav_btn_01);
+        JLabel navbtn02_3 = new JLabel(nav_btn_02);
+        JLabel navbtn03_3 = new JLabel(nav_btn_03);
+        JLabel navbtn04_3 = new JLabel(nav_btn_04);
+
+        JLabel header3 = new JLabel(headerbkg);
+        JLabel footer3 = new JLabel(footerbkg);
+        //JLabel content = new JLabel();
+
+        //content.setLayout(new FlowLayout());
+
+
+
+
+
+
+        footer3.setLayout(new FlowLayout());
+
+        footer3.add(Box.createRigidArea(new Dimension(100, 85)));
+        footer3.add(navbtn01);
+        footer3.add(Box.createRigidArea(new Dimension(100, 25)));
+        footer3.add(navbtn02);
+        footer3.add(Box.createRigidArea(new Dimension(100, 25)));
+        footer3.add(navbtn03);
+        footer3.add(Box.createRigidArea(new Dimension(100, 25)));
+        footer3.add(navbtn04);
+        footer3.add(Box.createRigidArea(new Dimension(100, 25)));
+
+
+
+
+        footer3.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+
+
+        header_footer3.setPreferredSize(new Dimension(1024, 576));
+
+        header_footer3.setBackground(Color.BLACK);
+
+        header_footer3.setLayout(new BorderLayout());
+
+        header_footer3.add(header3, BorderLayout.NORTH);
+        header_footer3.add(stage3, BorderLayout.CENTER);
+        header_footer3.add(footer3, BorderLayout.SOUTH);
+
+
+
+        tres.add(header_footer3);
+
+        tres.setVisible(true);
+
+
+
+
+
+        /**
+         * End Stage Three
+         */
+
+        /**
+         * Stage Four
+         */
+
+        JPanel quatro = new JPanel();
+
+        ImageIcon headerbkg4 = new ImageIcon("header.jpg");
+        ImageIcon footerbkg4 = new ImageIcon("footer.jpg");
+        ImageIcon nav_btn_01_4 = new ImageIcon("btn-01-normal.jpg");
+        ImageIcon nav_btn_02_4 = new ImageIcon("btn-02-normal.jpg");
+        ImageIcon nav_btn_03_4 = new ImageIcon("btn-03-normal.jpg");
+        ImageIcon nav_btn_04_4 = new ImageIcon("btn-04-normal.jpg");
+        ImageIcon nav_btn_01_over = new ImageIcon("btn-01-over.jpg");
+        ImageIcon nav_btn_02_over = new ImageIcon("btn-02-over.jpg");
+        ImageIcon nav_btn_03_over = new ImageIcon("btn-03-over.jpg");
+        ImageIcon nav_btn_04_over = new ImageIcon("btn-04-over.jpg");
+
+        // Stage Four Image setup
+
+
+        // Jlabel for images
+
+
+
+        JPanel header_footer4 = new JPanel();
+        JPanel stage4 = new JPanel();
+
+        stage4.setPreferredSize(new Dimension(1024, 436));
+        stage4.setBackground(Color.BLACK);
+
+
+        JLabel navbtn01_4 = new JLabel(nav_btn_01);
+        JLabel navbtn02_4 = new JLabel(nav_btn_02);
+        JLabel navbtn03_4 = new JLabel(nav_btn_03);
+        JLabel navbtn04_4 = new JLabel(nav_btn_04);
+
+        if(firstBuild == true){
+            int width = 768;
+            int height = 436;
+            int fps = 30;
+            videoInputPanel = new VideoInputDemo(width, height, fps);
+            videoInputPanel.setMirror(true);
+            stage.add(videoInputPanel, BorderLayout.CENTER );
+            firstBuild = false;
+        }
+        stage4.add(videoInputPanel, BorderLayout.CENTER );
+        stage4.repaint();
+
+        JLabel header4 = new JLabel(headerbkg);
+        JLabel footer4 = new JLabel(footerbkg);
+
+        footer4.setLayout(new FlowLayout());
+
+        footer4.add(Box.createRigidArea(new Dimension(100, 85)));
+        footer4.add(navbtn01);
+        footer4.add(Box.createRigidArea(new Dimension(100, 25)));
+        footer4.add(navbtn02);
+        footer4.add(Box.createRigidArea(new Dimension(100, 25)));
+        footer4.add(navbtn03);
+        footer4.add(Box.createRigidArea(new Dimension(100, 25)));
+        footer4.add(navbtn04);
+        footer4.add(Box.createRigidArea(new Dimension(100, 25)));
+
+        footer4.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+
+        header_footer4.setPreferredSize(new Dimension(1024, 576));
+
+        header_footer4.setBackground(Color.BLACK);
+
+        header_footer4.setLayout(new BorderLayout());
+
+        header_footer4.add(header4, BorderLayout.NORTH);
+        header_footer4.add(stage4, BorderLayout.CENTER);
+        header_footer4.add(footer4, BorderLayout.SOUTH);
+
+        quatro.add(header_footer4);
+
+
+
+        /**
+         * End Stage Four
+         */
+
+
+        main.add(uno, BorderLayout.NORTH);
+        main.add(dos, BorderLayout.NORTH);
+        main.add(tres, BorderLayout.NORTH);
+        main.add(quatro, BorderLayout.NORTH);
+
+        dos.setVisible(false);
+        tres.setVisible(false);
+        quatro.setVisible(false);
+
+
+
+        add(main);
 
         setResizable(false);
 
@@ -60,45 +378,26 @@ public class Main  extends JFrame   {
         OSCListener handler1 = new OSCListener() {
 
             public void acceptMessage(java.util.Date time, OSCMessage message) {
-                // TODO: Put your code to process a message in here
-                System.out.println("Inside");
-                message.setAddress("/done");
-                System.out.println("Handler1 called with address " + message.getAddress());
-                System.out.println("current state : " + currentStage);
-                if(currentStage != 1){
-                    BuildStageOne();
-                    // Print out values
-                    Object[] values = message.getArguments();
-                    System.out.printf("Values: [%s", values[0]);
-                    for (int i = 1; i < values.length; i++)
-                        System.out.printf(", %s", values[i]);
-                    System.out.println("]\n");
-                }else{
-                    //empty on purpose
-                }
+
+                uno.setVisible(true);
+                dos.setVisible(false);
+                tres.setVisible(false);
+                quatro.setVisible(false);
+
+
+
+
             }
         };
 
         OSCListener handler2 = new OSCListener() {
 
             public void acceptMessage(java.util.Date time, OSCMessage message) {
-                // TODO: Put your code to process a message in here
-                System.out.println("INside");
 
-
-                System.out.println("Handler1 called with address " + message.getAddress());
-                System.out.println("current state : " + currentStage);
-                if(currentStage != 2){
-                    BuildStageTwo();
-                    // Print out values
-                    Object[] values = message.getArguments();
-                    System.out.printf("Values: [%s", values[0]);
-                    for (int i = 1; i < values.length; i++)
-                        System.out.printf(", %s", values[i]);
-                    System.out.println("]\n");
-                }else{
-                    //empty on purpose
-                }
+                uno.setVisible(false);
+                dos.setVisible(true);
+                tres.setVisible(false);
+                quatro.setVisible(false);
 
 
             }
@@ -107,23 +406,12 @@ public class Main  extends JFrame   {
         OSCListener handler3 = new OSCListener() {
 
             public void acceptMessage(java.util.Date time, OSCMessage message) {
-                // TODO: Put your code to process a message in here
-                System.out.println("INside");
 
+                uno.setVisible(false);
+                dos.setVisible(false);
+                tres.setVisible(true);
+                quatro.setVisible(false);
 
-                System.out.println("Handler1 called with address " + message.getAddress());
-                System.out.println("current state : " + currentStage);
-                if(currentStage != 3){
-                    BuildStageThree();
-                    // Print out values
-                    Object[] values = message.getArguments();
-                    System.out.printf("Values: [%s", values[0]);
-                    for (int i = 1; i < values.length; i++)
-                        System.out.printf(", %s", values[i]);
-                    System.out.println("]\n");
-                }else{
-                    //empty on purpose
-                }
 
 
             }
@@ -132,27 +420,22 @@ public class Main  extends JFrame   {
         OSCListener handler4 = new OSCListener() {
 
             public void acceptMessage(java.util.Date time, OSCMessage message) {
-                // TODO: Put your code to process a message in here
-                System.out.println("Inside");
-                System.out.println("Handler1 called with address " + message.getAddress());
-                System.out.println("current state : " + currentStage);
-                if(currentStage != 4){
-                    BuildStageFour();
-                    // Print out values
-                    Object[] values = message.getArguments();
-                    System.out.printf("Values: [%s", values[0]);
-                    for (int i = 1; i < values.length; i++)
-                        System.out.printf(", %s", values[i]);
-                    System.out.println("]\n");
-                }else{
-                    //empty on purpose
-                }
+
+                uno.setVisible(false);
+                dos.setVisible(false);
+                tres.setVisible(false);
+                quatro.setVisible(true);
+
+
+
             }
         };
-//        receiver.addListener("/1/push1", handler1);
+
+
+        receiver.addListener("/1/push1", handler1);
         receiver.addListener("/1/push2", handler2);
-//        receiver.addListener("/1/push3", handler3);
-//        receiver.addListener("/1/push4", handler4);
+        receiver.addListener("/1/push3", handler3);
+        receiver.addListener("/1/push4", handler4);
         receiver.startListening();
         System.out.println("Server is listening on port " + receiverPort + "...");
     }
